@@ -6,7 +6,7 @@ const GlobalProvider = ({ children }: { children: ReactNode }) => {
   const [currentChat, setCurrentChat] = useState<chatContext>([]);
   const [userChats, setUserChats] = useState<chatContext[]>([]);
 
-  async function sendPrompt(newPrompt: chatContextItem) {
+  function sendPrompt(newPrompt: chatContextItem) {
     if (currentChat.length === 0) {
       const newChat = [...currentChat]; // shallow clone is fine
       setUserChats((prev) => [newChat, ...prev]);
@@ -15,6 +15,12 @@ const GlobalProvider = ({ children }: { children: ReactNode }) => {
     const chatContext = [...currentChat];
     const promptText = newPrompt.parts[0].text;
 
+    setCurrentChat((prev) => [
+      ...prev,
+      { role: "user", parts: [{ text: promptText }] },
+    ]);
+
+    
     chat(chatContext, promptText).then((res) =>
       setCurrentChat((prev) => [
         ...prev,
@@ -22,10 +28,6 @@ const GlobalProvider = ({ children }: { children: ReactNode }) => {
       ])
     );
 
-    setCurrentChat((prev) => [
-      ...prev,
-      { role: "user", parts: [{ text: promptText }] },
-    ]);
   }
 
   const value = {

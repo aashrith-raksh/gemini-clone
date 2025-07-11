@@ -1,6 +1,4 @@
 import { GoogleGenAI } from "@google/genai";
-// The client gets the API key from the environment variable `GEMINI_API_KEY`.
-// const GEMINI_API_KEY = "AIzaSyCNYZ1FGj3FGon6Ypte7o8060QBv9SBsGo";
 const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
 export default ai;
 
