@@ -17,8 +17,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "./ui/button";
 
 import { gemini_icon } from "@/assets/assets.ts";
+import { useContext } from "react";
+import { globalContext } from "@/store/global-context";
 
 export default function AppSidebar() {
+  const {userChats} = useContext(globalContext)
   const {open} = useSidebar()
   return (
     <>
@@ -48,13 +51,13 @@ export default function AppSidebar() {
             <SidebarGroupLabel>Recent Chats</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {Array.from({ length: 4 }).map((_, i) => {
+                {userChats.map((convo, i) => {
                   return (
                     <SidebarMenuItem key={`Chat-${i+1}`}>
                       <SidebarMenuButton asChild>
                         <a href={""}>
                           <MessageSquare />
-                          <span>{`Chat-${i+1}`}</span>
+                          <span>{`${convo[0].parts[0].text}`}</span>
                         </a>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -70,13 +73,16 @@ export default function AppSidebar() {
   );
 }
 
-{
-  /* <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <MessageSquare/>
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem> */
-}
+
+// {Array.from({length:4}).map((convo, i) => {
+//                   return (
+//                     <SidebarMenuItem key={`Chat-${i+1}`}>
+//                       <SidebarMenuButton asChild>
+//                         <a href={""}>
+//                           <MessageSquare />
+//                           <span>{`Chat-${i+1}`}</span>
+//                         </a>
+//                       </SidebarMenuButton>
+//                     </SidebarMenuItem>
+//                   );
+//                 })}

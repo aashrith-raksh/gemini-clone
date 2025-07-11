@@ -8,7 +8,7 @@ const GlobalProvider = ({ children }: { children: ReactNode }) => {
 
   function sendPrompt(newPrompt: chatContextItem) {
     if (currentChat.length === 0) {
-      const newChat = [...currentChat]; // shallow clone is fine
+      const newChat = [{...newPrompt}]; // shallow clone is fine
       setUserChats((prev) => [newChat, ...prev]);
     }
 
