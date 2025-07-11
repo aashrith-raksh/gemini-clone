@@ -33,7 +33,6 @@ export default function AppSidebar() {
             </SidebarMenuItem>
 
             <SidebarMenuItem className=" mt-2">
-              <SidebarMenuButton>
                 <Button
                   variant={"default"}
                   className="w-full opacity-95 font-normal"
@@ -41,7 +40,6 @@ export default function AppSidebar() {
                   <MessageCirclePlus />
                   {open? "New Chat": ""}
                 </Button>
-              </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarHeader>
